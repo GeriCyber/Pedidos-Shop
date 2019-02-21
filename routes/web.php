@@ -13,10 +13,16 @@
 
 Route::get('/', 'TestController@welcome');
 
-Route::get('/prueba', function () {
-    return 'hola mundo!';
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//CR
+Route::get('/admin/products', 'ProductController@index'); //Lista de productos
+Route::get('/admin/products/create', 'ProductController@create'); //Crear producto
+Route::post('/admin/products', 'ProductController@store'); //guardar en db producto
+Route::get('/admin/products/{id}/edit', 'ProductController@edit'); //Editar producto
+Route::post('/admin/products/{id}/edit', 'ProductController@update'); //actualizar en db el producto
+Route::delete('/admin/products/{id}', 'ProductController@destroy'); //actualizar en db el producto
+
+//UD
