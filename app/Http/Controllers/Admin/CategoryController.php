@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use File;
 
 class CategoryController extends Controller
 {
@@ -21,8 +22,19 @@ class CategoryController extends Controller
 
         $this->validate($request, Category::$rules, Category::$messages);
 
-        Category::create($request->all()); // mass assignment
-
+        $category = Category::create($request->only('name', 'description')); // mass assignment
+        if ($request->hasFile('image')) {
+           // Guardar la img
+            $file = $request->file('image');
+            $path = public_path().'/images/categories';
+            $fileName = uniqid().$file->getClientOriginalName();
+            $moved = $file->move($path, $fileName);
+            if ($moved) {
+                // Crear registro en la tabla ctegories
+                $category->image = $fileName;
+                $category->save(); //INSERT
+            }
+        }
         return redirect('/admin/categories');
     }
 
@@ -35,7 +47,25 @@ class CategoryController extends Controller
 
         $this->validate($request, Category::$rules, Category::$messages);
 
-        $category->update($request->all()); // mass assignment
+        $category->update($request->only('name', 'description')); // mass assignment
+        if ($request->hasFile('image')) {
+           // Guardar la img
+            $file = $request->file('image');
+            $path = public_path().'/images/categories';
+            $fileName = uniqid().$file->getClientOriginalName();
+            $moved = $file->move($path, $fileName);
+            
+            if ($moved) {
+                $previousPath = $path.'/'.$category->image;
+                // Actualizar registro en la tabla ctegories
+                $category->image = $fileName;
+                $saved = $category->save(); //Update
+
+                if ($saved) {
+                    File::delete($previousPath);
+                }
+            }
+        }
 
         return redirect('/admin/categories');
     }

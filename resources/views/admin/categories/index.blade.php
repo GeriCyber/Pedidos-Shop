@@ -19,8 +19,9 @@
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
+                                <th class="text-center col-md-2">Imagen</th>
                                 <th class="text-center col-md-3">Nombre</th>
-                                <th class="text-center col-md-6">Descripcion</th>
+                                <th class="text-center col-md-4">Descripcion</th>
                                 <th class="text-right col-md-3">Opciones</th>
                             </tr>
                         </thead>
@@ -28,6 +29,7 @@
                             @foreach ($categories as $category)
                             <tr>
                                 <td class="text-center">{{ $category->id }}</td>
+                                <td class="text-center"><img src="{{$category->featured_image_url}}" width="80"> </td>
                                 <td>{{ $category->name }}</td>
                                 <td class="text-center">{{ $category->description }}</td>
                                 <td class="td-actions text-right">
