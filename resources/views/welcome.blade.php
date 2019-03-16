@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('body-class', 'landing-page')
-@section('page-title', 'Bienvenido a App Shop')
+@section('page-title', 'Bienvenido a Pedidos-Shop')
 @section('styles')
    <style>
         .team .row .col-md-4 {
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h1 class="title">Bienvenido a App Shop</h1>
+                <h1 class="title">Pedidos-Shop</h1>
                 <h4>Realiza pedidos en linea y te contactamos para coordinar la entrega.</h4>
                 <br />
                 <a href="#" class="btn btn-danger btn-raised btn-lg">
@@ -33,7 +33,7 @@
         <div class="section text-center section-landing">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h2 class="title">Por que App Shop?</h2>
+                    <h2 class="title">Por que Pedidos-Shop?</h2>
                     <h5 class="description">Puedes revisar nuestra relacion completa de productos, comparar precios y realizar pedidos cuando estes seguro.</h5>
                 </div>
             </div>
@@ -72,27 +72,30 @@
         </div>
 
         <div class="section text-center">
-            <h2 class="title">Productos disponibles</h2>
+            <h2 class="title">Categorias</h2>
+
+            <form method="GET" class="form-inline" action="{{ url('/search') }}">
+                <input type="text" placeholder="Buscar Producto..." class="form-control" name="search">
+                <button type="submit" class="btn btn-primary btn-just-icon">
+                    <i class="material-icons">search</i></button>
+            </form>
 
             <div class="team">
                 <div class="row">
-                    @foreach ($products as $product)
+                    @foreach ($categories as $category)
                     <div class="col-md-4">
                         <div class="team-player card">
-                            <img src="{{ $product->featured_image_url }}" alt="{{ $product->name }}" class="img-raised img-circle">
+                            <img src="{{ $category->featured_image_url }}" alt="{{ $category->name }}" class="img-raised img-circle">
                             <h4 class="title">
-                                <a href="{{ url('/products/'.$product->id) }}">{{ $product->name }}</a>
+                                <a href="{{ url('/categories/'.$category->id) }}">{{ $category->name }}</a>
                                 <br />
-                                <small class="text-muted">{{ $product->category->name }}</small>
+                                <small class="text-muted">{{ $category->name }}</small>
                             </h4>
-                            <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                            <p class="description">{{$category->description}}</p>
                         </div>
                     </div>
                     @endforeach
                     
-                </div>
-                <div class="row">
-                    {{ $products->links() }}
                 </div>
             </div>
 
