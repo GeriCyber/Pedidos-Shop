@@ -23,6 +23,9 @@
                                 </a>
                             </div>
                         </div>
+                        @if ($errors->has('password'))
+                            <div class="error">{{ $errors->first('password') }}</div>
+                        @endif
                         <p class="text-divider">Completa tus datos</p>
                         <div class="content">
                             <div class="input-group">
@@ -53,7 +56,7 @@
                             </div>
                         </div>
                         <div class="footer text-center">
-                            <button type="submit" class="btn btn-primary">confirmar Registro</button>
+                            <button type="submit" class="btn btn-primary">Confirmar Registro</button>
                         </div>
                     </form>
                 </div>

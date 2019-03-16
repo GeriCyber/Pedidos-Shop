@@ -76,6 +76,8 @@
                 </tbody>
             </table>
 
+            <p><b>Importe a pagar: </b>${{ auth()->user()->cart->total }}</p>
+
             <div class="text-center">
                 <form action="{{ url('/order') }}" method="POST">
                     {{ csrf_field() }}
