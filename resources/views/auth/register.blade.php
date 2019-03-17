@@ -21,7 +21,7 @@
                         <div class="header header-primary text-center">
                             <h4>Registro</h4>
                             <div class="social-line">
-                                <a href="#pablo" class="btn btn-simple btn-just-icon">
+                                <a href="{{ url('/login/redirect') }}" class="btn btn-simple btn-just-icon">
                                     <i class="fa fa-facebook-square"></i>
                                 </a>
                                 <a href="#pablo" class="btn btn-simple btn-just-icon">

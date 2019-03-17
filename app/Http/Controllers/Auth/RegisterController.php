@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Illuminate\Http\Request as Req;
 
+use Socialite;
+use Illuminate\Support\Facades\Auth;
+
 class RegisterController extends Controller
 {
     /*
@@ -75,5 +78,41 @@ class RegisterController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         return view('auth.register')->with(compact('name', 'email'));
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $fcbUser = Socialite::driver('facebook')->user();
+        $user = User::where('fcbId', $fcbUser->getId())->first();
+
+        if (!$user) {
+            $pass = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') , 0 , 10 );
+            $user = User::create([
+            'name' => $fcbUser->getName(),
+            'email' => $fcbUser->getEmail(),
+            'password' => bcrypt($pass),
+            'fcbId' => $fcbUser->getId(),
+            ]);
+        }
+
+        Auth::login($user, true);
+        return redirect($this->redirectTo);
+        // return $user->getAvatar();
+        // $user->token;
     }
 }

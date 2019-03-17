@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request as Req;
+use Socialite;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -52,5 +55,41 @@ class LoginController extends Controller
             return session()->pull('redirect_to');
         }
         return $this->redirectTo;
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $fcbUser = Socialite::driver('facebook')->user();
+        $user = User::where('fcbId', $fcbUser->getId())->first();
+
+        if (!$user) {
+            $pass = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') , 0 , 10 );
+            $user = User::create([
+            'name' => $fcbUser->getName(),
+            'email' => $fcbUser->getEmail(),
+            'password' => bcrypt($pass),
+            'fcbId' => $fcbUser->getId(),
+            ]);
+        }
+
+        Auth::login($user, true);
+        return redirect($this->redirectTo);
+        // return $user->getAvatar();
+        // $user->token;
     }
 }

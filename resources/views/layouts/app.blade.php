@@ -92,12 +92,9 @@
         	</div>
     	</div>
     </nav>
-
     <div class="wrapper">
         @yield('content');
     </div>
-
-
 </body>
     <!--   Core JS Files   -->
     <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>

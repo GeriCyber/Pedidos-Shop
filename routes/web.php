@@ -15,6 +15,10 @@ Route::get('/', 'TestController@welcome');
 
 Auth::routes();
 
+//Socialite routes
+Route::get('/login/redirect', 'Auth\LoginController@redirectToProvider');
+Route::get('/login/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::get('/search', 'SearchController@show');
 Route::get('/products/json', 'SearchController@data');
 
@@ -26,7 +30,7 @@ Route::post('/cart', 'CartDetailController@store');
 Route::delete('/cart', 'CartDetailController@destroy');
 Route::post('/order', 'CartController@update');
 
-//CR
+//CRUD
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group(function () {
     Route::get('/products', 'ProductController@index'); //Lista de productos
     Route::get('/products/create', 'ProductController@create'); //Crear producto
@@ -47,5 +51,3 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group
     Route::post('/categories/{category}/edit', 'CategoryController@update'); 
     Route::delete('/categories/{category}', 'CategoryController@destroy'); 
 });
-
-//UD
