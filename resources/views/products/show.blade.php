@@ -29,9 +29,15 @@
             </div>
 
             <div class="text-center">
-                <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#ModalAddToCart">
+                @if(auth()->check())
+                    <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#ModalAddToCart">
                     <i class="material-icons">add</i>Agregar al carrito
                 </button>
+                @else
+                    <a href="{{ url('/login?redirect_to='.url()->current()) }}" class="btn btn-primary btn-round">
+                    <i class="material-icons">add</i>Agregar al carrito
+                    </a>
+                @endif
             </div>
 
             <div class="row">

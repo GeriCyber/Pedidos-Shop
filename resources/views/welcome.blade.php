@@ -144,32 +144,26 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2 class="text-center title">Aun no te has registrado?</h2>
-                    <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-                    <form class="contact-form">
+                    <form class="contact-form" method="GET" action="{{ url('/register') }}">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Nombre</label>
-                                    <input type="email" class="form-control">
+                                    <input type="text" name="name" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Correo Electronico</label>
-                                    <input type="email" class="form-control">
+                                    <input type="email" name="email" class="form-control">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group label-floating">
-                            <label class="control-label">Mensaje</label>
-                            <textarea class="form-control" rows="4"></textarea>
-                        </div>
-
                         <div class="row">
                             <div class="col-md-4 col-md-offset-4 text-center">
-                                <button class="btn btn-primary btn-raised">
-                                    Enviar Consulta
+                                <button type="submit" class="btn btn-primary btn-raised">
+                                    Iniciar Registro
                                 </button>
                             </div>
                         </div>
@@ -194,7 +188,6 @@
             var products = new Bloodhound({
               datumTokenizer: Bloodhound.tokenizers.whitespace,
               queryTokenizer: Bloodhound.tokenizers.whitespace,
-              // `states` is an array of state names defined in "The Basics"
               prefetch: '{{ url("/products/json") }}'
             });
 
@@ -206,6 +199,7 @@
                 name: 'products',
                 source: products
             })
+            console.log(products);
         })
     </script>
 @endsection

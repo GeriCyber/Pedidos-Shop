@@ -7,6 +7,15 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                 <div class="card card-signup">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form class="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
                         <div class="header header-primary text-center">
@@ -23,23 +32,20 @@
                                 </a>
                             </div>
                         </div>
-                        @if ($errors->has('password'))
-                            <div class="error">{{ $errors->first('password') }}</div>
-                        @endif
                         <p class="text-divider">Completa tus datos</p>
                         <div class="content">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="material-icons">face</i>
                                 </span>
-                                <input id="name" name="name" value="{{ old('name') }}" required type="text" class="form-control" placeholder="Nombre">
+                                <input id="name" name="name" value="{{ old('name', $name) }}" required type="text" class="form-control" placeholder="Nombre">
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="material-icons">email</i>
                                 </span>
-                                <input placeholder="Email" id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input placeholder="Email" id="email" type="email" class="form-control" name="email" value="{{ old('email', $email) }}" required>
                             </div>
 
                             <div class="input-group">
