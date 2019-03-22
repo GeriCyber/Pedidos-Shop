@@ -36,9 +36,9 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => env('315606035813769'),
-        'client_secret' => env('07caebec0599efb5dea87e058720d421'),
-        'redirect' => env('http://pedidos-shop.herokuapp.com/login/callback'),
+        'client_id' => '315606035813769',
+        'client_secret' => '07caebec0599efb5dea87e058720d421',
+        'redirect' => 'http://pedidos-shop.herokuapp.com/login/callback',
     ],
 
 ];
