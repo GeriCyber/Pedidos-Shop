@@ -180,7 +180,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ secure_asset('/js/typeahead.bundle.min.js') }}"></script>
+    <script src="{{ asset('/js/typeahead.bundle.min.js') }}"></script>
     <script>
         $(function(){
 
