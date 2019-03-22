@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}">
-	<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{{ secure_asset('img/apple-icon.png') }}">
+	<link rel="icon" type="image/png" href="{{ secure_asset('img/favicon.png') }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>@yield('page-title', config('app.name') )</title>
@@ -16,8 +16,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
 	<!-- CSS Files -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
-	<link href="{{ asset('css/material-kit.css') }}" rel="stylesheet"/>
+    <link href="{{ secure_asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+	<link href="{{ secure_asset('css/material-kit.css') }}" rel="stylesheet"/>
 	@yield('styles');
 
 </head>
@@ -97,18 +97,18 @@
     </div>
 </body>
     <!--   Core JS Files   -->
-    <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/material.min.js') }}"></script>
+    <script src="{{ secure_asset('js/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ secure_asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ secure_asset('js/material.min.js') }}"></script>
 
     <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    <script src="{{ asset('js/nouislider.min.js') }}" type="text/javascript"></script>
+    <script src="{{ secure_asset('js/nouislider.min.js') }}" type="text/javascript"></script>
 
     <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-    <script src="{{ asset('js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ secure_asset('js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
 
     <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-    <script src="{{ asset('js/material-kit.js') }}" type="text/javascript"></script>
+    <script src="{{ secure_asset('js/material-kit.js') }}" type="text/javascript"></script>
 
     @yield('scripts')
     
