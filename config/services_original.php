@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('sandbox9adf74f2f781459eb2a045f2540810a3.mailgun.org'),
-        'secret' => env('107d7552e543f4df99ab5e31c4eeb938-de7062c6-b594c748'),
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
     ],
 
     'ses' => [
@@ -36,9 +36,9 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => env('315606035813769'),
-        'client_secret' => env('07caebec0599efb5dea87e058720d421'),
-        'redirect' => env('http://pedidos-shop.herokuapp.com/login/callback'),
+        'client_id' => env('FACEBOOK_ID'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect' => env('FACEBOOK_URL'),
     ],
 
 ];
