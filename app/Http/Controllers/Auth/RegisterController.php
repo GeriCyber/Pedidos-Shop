@@ -67,10 +67,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $admin = false;
+        if ($data['email'] == 'gericyber@gmail.com') {
+            $admin = true;
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'admin' => $admin,
         ]);
     }
 
